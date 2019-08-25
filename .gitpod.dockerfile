@@ -27,7 +27,7 @@ RUN chmod +x /usr/bin/start-vnc-session.sh
 RUN echo "export DISPLAY=:0" >> ~/.bashrc
 RUN echo "[ ! -e /tmp/.X0-lock ] && (/usr/bin/start-vnc-session.sh &> /tmp/display-\${DISPLAY}.log)" >> ~/.bashrc
 
-USER gitpod
+
 ### checks ###
 # no root-owned files in the home directory
 RUN notOwnedFile=$(find . -not "(" -user gitpod -and -group gitpod ")" -print -quit) \
