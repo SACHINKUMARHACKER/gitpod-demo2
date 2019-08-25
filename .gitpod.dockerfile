@@ -19,7 +19,7 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
 RUN apt-get update
 
 # installation
-RUN apt-get install ros-kinetic-desktop-full
+RUN apt-get install -y ros-kinetic-desktop-full
 
 # rosdep
 RUN rosdep init
