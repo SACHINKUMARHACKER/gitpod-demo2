@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /workspace/gitpod-demo2/catkin_ws/devel/setup.sh

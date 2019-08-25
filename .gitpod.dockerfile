@@ -5,10 +5,11 @@ USER root
 # Install Xvfb, JavaFX-helpers and Openbox window manager
 RUN apt-get update \
     && apt-get install -y git-core \
+    && apt-get install -y htop \
     && apt-get install -y firefox \
     && apt-get install -yq xvfb x11vnc xterm openjfx libopenjfx-java openbox \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-    
+
 # ROS installation
 RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
 
@@ -28,6 +29,7 @@ RUN rosdep update
 # source file
 RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 # RUN source ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc"
 
 # useful tools
 RUN apt install -y python-rosinstall python-rosinstall-generator python-wstool build-essential
