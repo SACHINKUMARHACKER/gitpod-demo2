@@ -1,9 +1,10 @@
-FROM gitpod/workspace-full:latest
+FROM ubuntu:16.04
 
 USER root
 
 # Install Xvfb, JavaFX-helpers and Openbox window manager
 RUN apt-get update \
+    && apt-get install -y git-core \
     && apt-get install -y firefox \
     && apt-get install -yq xvfb x11vnc xterm openjfx libopenjfx-java openbox \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
@@ -26,6 +27,7 @@ RUN chmod +x /usr/bin/start-vnc-session.sh
 RUN echo "export DISPLAY=:0" >> ~/.bashrc
 RUN echo "[ ! -e /tmp/.X0-lock ] && (/usr/bin/start-vnc-session.sh &> /tmp/display-\${DISPLAY}.log)" >> ~/.bashrc
 
+USER gitpod
 ### checks ###
 # no root-owned files in the home directory
 RUN notOwnedFile=$(find . -not "(" -user gitpod -and -group gitpod ")" -print -quit) \
