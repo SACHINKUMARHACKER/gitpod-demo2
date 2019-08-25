@@ -8,6 +8,29 @@ RUN apt-get update \
     && apt-get install -y firefox \
     && apt-get install -yq xvfb x11vnc xterm openjfx libopenjfx-java openbox \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+    
+# ROS installation
+RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
+
+# key
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+# update
+RUN apt-get update
+
+# installation
+RUN apt-get install ros-kinetic-desktop-full
+
+# rosdep
+RUN rosdep init
+RUN rosdep update
+
+# source file
+RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+RUN source ~/.bashrc
+
+# useful tools
+RUN apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
 
 # overwrite this env variable to use a different window manager
 ENV WINDOW_MANAGER="openbox"
