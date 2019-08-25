@@ -27,10 +27,10 @@ RUN rosdep update
 
 # source file
 RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
-RUN source ~/.bashrc
+# RUN source ~/.bashrc
 
 # useful tools
-RUN apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+RUN apt install -y python-rosinstall python-rosinstall-generator python-wstool build-essential
 
 # overwrite this env variable to use a different window manager
 ENV WINDOW_MANAGER="openbox"
